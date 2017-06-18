@@ -40,9 +40,17 @@ def webhook():
 					entity,value = wit_response(messaging_text)
 					
 					if entity == "cuisine":
+						setCuisine()
 						response = "Oh i love {} too".format(str(value)) 
-					elif entity == "establishments":
-						response = "okay, let's find a {} for you".format(str(value))
+					elif entity == "location":
+						setLocation()
+						response = "okay, let's find a restaurant in {} for you".format(str(value))
+					elif entity == "preference":
+						setPreference()
+						response = "you chose {}".format(str(value))
+					elif entity == "restaurant_name":
+						fetchReview()
+						response == "Review for {} restaurant".format(str(value))
 						
 					if response == None:
 						response = "Sorry"
