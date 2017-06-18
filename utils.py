@@ -16,4 +16,4 @@ def wit_response(message_text):
 	return(entity, value)
 	
 	
-client = Wit(access_token = wit_access_token, actions=actions)
+client = Wit(access_token = wit_access_token)
