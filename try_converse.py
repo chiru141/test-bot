@@ -2,19 +2,11 @@ from wit import Wit
 
 wit_access_token = "GPOOEJ2VHEGD5BA5C5EFZ3GZ4YYFTBZ2"
 
-
+context={}
 def wit_response(sess_id,message_text,context):
-	#resp = client.message(message_text)               
-	#entity = None
-	#value = None 
-	
-	#try:
-	#	entity = list(resp['entities'])[0]                     #why 0 ? 
-	#	value = resp['entities'][entity][0]['value']
-	#except:
-	#	pass	
-	#return(entity, value)
+	#resp = client.converse(sess_id,message_text,context)               
 	context=client.run_actions(sess_id,message_text,context)
+
 	return context 
 	
 	
@@ -28,11 +20,10 @@ def first_entity_value(entities, entity):
 	return val["value"] if isinstance(val, dict) else val 
 
 def send(request, response):
-    #print(response['text'])
-	return response['text']
+    print(response['text'])
 	
 def setCuisine(request):
-	#print('entity : ',request['entities'])
+	print('entity : ',request['entities'])
 	context=request['context']
 	entities=request['entities']
 	
@@ -43,7 +34,7 @@ def setCuisine(request):
 	
 	
 def setLocation(request):
-	#print("received location from user ",request['entities'])
+	print("received location from user ",request['entities'])
 	context=request['context']
 	entities=request['entities']
 	location = first_entity_value(entities, "location")
@@ -52,7 +43,7 @@ def setLocation(request):
 	return context
 
 def setPreference(request):
-	#print("received preference from user ",request['entities'])
+	print("received preference from user ",request['entities'])
 	context=request['context']
 	entities=request['entities']
 	
@@ -90,3 +81,8 @@ actions = {
 }
 	
 client = Wit(access_token = wit_access_token, actions=actions)
+
+context={}
+
+wit_response("6657","Hi",context)
+wit_response("6657","i want mexican",context)
