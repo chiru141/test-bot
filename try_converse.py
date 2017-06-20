@@ -6,7 +6,7 @@ context={}
 def wit_response(sess_id,message_text,context):
 	#resp = client.converse(sess_id,message_text,context)               
 	context=client.run_actions(sess_id,message_text,context)
-
+	print context
 	return context 
 	
 	

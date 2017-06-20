@@ -1,7 +1,7 @@
 import os, sys
 from flask import Flask, request
 from pymessenger import Bot
-from utils import *
+import utils
 
 app = Flask(__name__)
 
@@ -40,7 +40,7 @@ def webhook():
 						messaging_text = 'no text'
 					
 					sess_id = messaging_event['timestamp']
-					global fb_response 
+					#global fb_response 
 					fb_response= None
 					context = wit_response(sess_id,messaging_text,context)
 					fb_response="only"

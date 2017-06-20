@@ -2,6 +2,7 @@ from wit import Wit
 
 wit_access_token = "GPOOEJ2VHEGD5BA5C5EFZ3GZ4YYFTBZ2"
 
+#global fb_response
 
 def wit_response(sess_id,message_text,context):
 	#resp = client.message(message_text)               
@@ -30,7 +31,7 @@ def first_entity_value(entities, entity):
 def send(request, response):
     #print(response['text'])
 	#return response['text']
-	fb_response=response['text']
+	app.fb_response=response['text']
 	
 def setCuisine(request):
 	#print('entity : ',request['entities'])
