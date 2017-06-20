@@ -43,7 +43,7 @@ def webhook():
 					global fb_response 
 					fb_response= None
 					context = wit_response(sess_id,messaging_text,context)
-					
+					fb_response="only"
 					#if entity == "cuisine":
 					#	setCuisine()
 					#	response = "Oh i love {} too".format(str(value)) 
