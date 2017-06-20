@@ -29,7 +29,8 @@ def first_entity_value(entities, entity):
 
 def send(request, response):
     #print(response['text'])
-	return response['text']
+	#return response['text']
+	fb_response=response['text']
 	
 def setCuisine(request):
 	#print('entity : ',request['entities'])

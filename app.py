@@ -40,8 +40,9 @@ def webhook():
 						messaging_text = 'no text'
 					
 					sess_id = messaging_event['timestamp']
-					response = None
-					response,context = wit_response(sess_id,messaging_text,context)
+					global fb_response 
+					fb_response= None
+					context = wit_response(sess_id,messaging_text,context)
 					
 					#if entity == "cuisine":
 					#	setCuisine()
@@ -63,7 +64,7 @@ def webhook():
 					#response = messaging_text
 					
 					
-					bot.send_text_message(sender_id, response)
+					bot.send_text_message(sender_id, fb_response)
 	
 	
 	return "ok", 200  
