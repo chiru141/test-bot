@@ -1,6 +1,11 @@
 from wit import Wit
+import requests
+import json
+from pprint import pprint
+
 
 wit_access_token = "GPOOEJ2VHEGD5BA5C5EFZ3GZ4YYFTBZ2"
+zomato_api_key="bdb3b7c195a74c2b0deefe4534c6a410"
 
 #global fb_response
 
@@ -50,7 +55,10 @@ def setLocation(request):
 	entities=request['entities']
 	location = first_entity_value(entities, "location")
 	
-	context['location']=location
+	response_locationID = requests.get("https://developers.zomato.com/api/v2.1/cities?apikey=" + zomato_api_key + "&q=" location )
+	data_city=response_locationID.json()
+	context['location_id']= data_city['location_suggestions'][0]['id']
+	#context['location_id']=location
 	return context
 
 def setPreference(request):
@@ -74,7 +82,21 @@ def fetchReview(request):
 	return context
 		
 def findRestaurant(request): 
-		print("received from user ",request['entities'])
+		print("received from user ",request)
+		print request['context']['cuisine']
+		findRestaurantURL = "https://developers.zomato.com/api/v2.1/search?"
+		URL_withAPI = findRestaurantURL + "apikey=" + zomato_api_key
+		URL_withPAR = URL_withAPI + "&start=0" + "&count=10" + "&cuisines=" + request['context']['cuisine'] + "&sort=rating&entity_id=" + request['context']['location_id']
+		#print URL_withPAR
+		response = requests.get(URL_withPAR)
+		print response
+		data=response.json()
+		number = len(data['restaurants'])
+		#print number
+		for i in range(0,number):
+			print(data['restaurants'][i]['restaurant']['name'])
+			print(data['restaurants'][i]['restaurant']['location']['address'])
+			print(data['restaurants'][i]['restaurant']['user_rating']['aggregate_rating'])	
 		
 #def my_action(request):
  #   print('Received from user...', request['text'])
